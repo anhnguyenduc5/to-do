@@ -3,6 +3,8 @@ package server
 import (
 	"log"
 	"to-do/config"
+	"to-do/database"
+	"to-do/handler"
 )
 
 func RegisterServer() {
@@ -16,7 +18,7 @@ func RegisterServer() {
 		log.Fatalf("Could not initialize database: %v", err)
 	}
 	// Initialize router
-	r := feature.RegisterHandlerV1(db)
+	r := handler.RegisterHandlerV1(db)
 	// Start server
 	log.Printf("Server is running on port %s", cfg.ServerPort)
 	if err := r.Run(":" + cfg.ServerPort); err != nil {
